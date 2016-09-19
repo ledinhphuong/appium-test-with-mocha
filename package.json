@@ -1,0 +1,44 @@
+{
+  "name": "auto-test",
+  "version": "0.0.1",
+  "description": "Automation testing script using Mocha with ES6 and Babel 6",
+  "scripts": {
+    "test": "npm run ios-safari-cover",
+    "\\": "RUN_LOOP=1 DEVICE_NAME=\"iPhone\" npm run ios-safari",
+    "ios-safari": "mocha --compilers js:babel-core/register --timeout 120s src/ios-safari.js",
+    "ios-safari-cover": "istanbul cover _mocha -- --compilers js:babel-core/register --timeout 120s src/ios-safari.js"
+  },
+  "keywords": [
+    "automation",
+    "js",
+    "es6",
+    "mocha",
+    "appium",
+    "chai",
+    "babel",
+    "istanbul"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ledinhphuong/auto-test.git"
+  },
+  "author": "Phuong Le <lephuong.info@gmail.com> (https://github.com/ledinhphuong)",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-core": "^6.14.0",
+    "babel-plugin-add-module-exports": "^0.2.1",
+    "babel-plugin-transform-decorators-legacy": "^1.3.4",
+    "babel-plugin-transform-flow-strip-types": "^6.14.0",
+    "babel-preset-es2015": "^6.14.0",
+    "babel-preset-stage-0": "^6.5.0",
+    "babel-register": "^6.14.0",
+    "bluebird": "^3.4.6",
+    "chai": "^3.5.0",
+    "istanbul": "^1.0.0-alpha.2",
+    "mocha": "^3.0.2",
+    "wd": "^0.4.0"
+  },
+  "dependencies": {
+    "babel-polyfill": "^6.13.0"
+  }
+}
