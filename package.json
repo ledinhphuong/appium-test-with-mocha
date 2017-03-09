@@ -3,10 +3,14 @@
   "version": "0.0.1",
   "description": "Automation testing script using Mocha with ES6 and Babel 6",
   "scripts": {
-    "test": "npm run ios-safari-cover",
-    "\\": "RUN_LOOP=1 DEVICE_NAME=\"iPhone\" npm run ios-safari",
-    "ios-safari": "mocha --compilers js:babel-core/register --timeout 120s src/ios-safari.js",
-    "ios-safari-cover": "istanbul cover _mocha -- --compilers js:babel-core/register --timeout 120s src/ios-safari.js"
+    "test": "npm run ios-safari",
+    "\\": "LOOP=1 NAME=\"iPhone\" npm run ios-safari",
+    "ios-safari": "istanbul cover _mocha -- --compilers js:babel-core/register --timeout 120s src/ios-safari.js",
+    "ios-safari-no-coverage": "mocha --compilers js:babel-core/register --timeout 120s src/ios-safari.js",
+    "ios-youtube": "istanbul cover _mocha -- --compilers js:babel-core/register --timeout 3600s src/ios-youtube.js",
+    "android-chrome": "istanbul cover _mocha -- --compilers js:babel-core/register --timeout 120s src/android-chrome.js",
+    "build": "gulp build",
+    "webpack": "rm -rf ./dist && webpack"
   },
   "keywords": [
     "automation",
@@ -34,11 +38,18 @@
     "babel-register": "^6.14.0",
     "bluebird": "^3.4.6",
     "chai": "^3.5.0",
+    "del": "^2.2.2",
+    "gulp": "^3.9.1",
+    "gulp-babel": "^6.1.2",
+    "gulp-uglify": "^2.1.2",
+    "gulp-util": "^3.0.8",
     "istanbul": "^1.0.0-alpha.2",
     "mocha": "^3.0.2",
-    "wd": "^0.4.0"
+    "wd": "^0.4.0",
+    "webpack": "^2.2.1"
   },
   "dependencies": {
-    "babel-polyfill": "^6.13.0"
+    "babel-polyfill": "^6.13.0",
+    "colors": "^1.1.2"
   }
 }

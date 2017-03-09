@@ -6,16 +6,17 @@ import {assert} from 'chai'
 import {exec} from 'child_process'
 import {Cloud, LocalHost, AppiumServer} from './environment'
 
-const iosCaps = {
-  browserName: 'Safari',
-  platformName: 'iOS',
-  deviceName: process.env.NAME || "iPhone 6",
-  udid: '79de3c497b9f174288a68019040ae4aa25907b44',
-  captureScreenshots: true,
-  newCommandTimeout: 90000
+const execAsync = BPromise.promisify(exec, {multiArgs: true})
+
+const androidCaps = {
+  browserName: 'Chrome',
+  platformName: 'Android',
+  deviceName: process.env.NAME || "Galaxy S7",
+  // udid: 'ce0716079da3062c05',
+  captureScreenshots: true
 }
 
-const caps = iosCaps
+const caps = androidCaps
 const server = Cloud
 const testUrl = 'http://the-internet.herokuapp.com/login'
 const loopCount = process.env.LOOP || 1
@@ -61,6 +62,11 @@ describe(`Running \"${TEST_CASE}\" test with ${loopCount} time(s) on 1 device - 
           .waitForElementByXPath("//form[@name='login']")
           .submit()
           .quit()
+
+        if (caps.udid) {
+          const [stdout2] = await execAsync(`\"${process.env.ANDROID_HOME}/platform-tools/adb\" -s ${caps.udid} shell input keyevent 26`)
+          console.log(stdout2)
+        }
       }
       catch (e) {
         console.error(e)

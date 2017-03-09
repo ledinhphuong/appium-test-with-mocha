@@ -7,16 +7,14 @@ import {exec} from 'child_process'
 import {Cloud, LocalHost, AppiumServer} from './environment'
 
 const iosCaps = {
-  browserName: 'Safari',
   platformName: 'iOS',
   deviceName: process.env.NAME || "iPhone 6",
-  udid: '79de3c497b9f174288a68019040ae4aa25907b44',
-  captureScreenshots: true,
-  newCommandTimeout: 90000
+  udid: '8748d2bee70b9693a6fac194758abb7d370430fc',
+  bundleId: 'com.google.ios.youtube'
 }
 
 const caps = iosCaps
-const server = Cloud
+const server = AppiumServer
 const testUrl = 'http://the-internet.herokuapp.com/login'
 const loopCount = process.env.LOOP || 1
 const TEST_CASE = 'Input name into textfield'
@@ -34,17 +32,17 @@ describe(`Running \"${TEST_CASE}\" test with ${loopCount} time(s) on 1 device - 
 
   for (i = 0; i < loopCount; i++) {
     it(`${TEST_CASE}`, async () => {
-      const browser = wd.promiseChainRemote(server)
-      browser.on('status', (info) => {console.log(info.cyan)})
-      browser.on('command', (meth, path, data) => {
+      const driver = wd.promiseChainRemote(server)
+      driver.on('status', (info) => {console.log(info.cyan)})
+      driver.on('command', (meth, path, data) => {
         console.log('> ' + meth.yellow, path.grey, data || '')
       })
-      browser.on('http', (meth, path, data) => {
+      driver.on('http', (meth, path, data) => {
         console.log('> ' + meth.magenta, path, (data || '').grey)
       })
 
       try {
-        await browser.init(caps)
+        await driver.init(caps)
       }
       catch (e) {
         console.error(e)
@@ -52,14 +50,10 @@ describe(`Running \"${TEST_CASE}\" test with ${loopCount} time(s) on 1 device - 
       }
 
       try {
-        await browser
-          .get(`${testUrl}`)
-          .waitForElementById('username')
-          .sendKeys('foo')
-          .waitForElementById('password')
-          .sendKeys('SuperSecretPassword!')
-          .waitForElementByXPath("//form[@name='login']")
-          .submit()
+        await driver
+          .waitForElementByXPath("//*[@name='id.ui.navigation.search.button']")
+          .click()
+          .sleep(5000)
           .quit()
       }
       catch (e) {
