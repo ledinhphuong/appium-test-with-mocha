@@ -1,14 +1,14 @@
 {
   "name": "auto-test",
   "version": "0.0.1",
-  "description": "Automation testing script using Mocha with ES6 and Babel 6",
+  "description": "Automation test script using Mocha with ES6 and Babel 6",
   "scripts": {
     "test": "npm run ios-safari",
     "\\": "LOOP=1 NAME=\"iPhone\" npm run ios-safari",
-    "ios-safari": "istanbul cover _mocha -- --compilers js:babel-core/register --timeout 120s src/ios-safari.js",
-    "ios-safari-no-coverage": "mocha --compilers js:babel-core/register --timeout 120s src/ios-safari.js",
-    "ios-youtube": "istanbul cover _mocha -- --compilers js:babel-core/register --timeout 3600s src/ios-youtube.js",
-    "android-chrome": "istanbul cover _mocha -- --compilers js:babel-core/register --timeout 120s src/android-chrome.js",
+    "ios-safari": "istanbul cover _mocha -- --compilers js:babel-core/register --timeout 600s src/ios-safari.js",
+    "ios-safari-no-coverage": "mocha --compilers js:babel-core/register --timeout 600s src/ios-safari.js",
+    "ios-youtube": "istanbul cover _mocha -- --compilers js:babel-core/register --timeout 600s src/ios-youtube.js",
+    "android-chrome": "istanbul cover _mocha -- --compilers js:babel-core/register --timeout 600s src/android-chrome.js",
     "build": "gulp build",
     "webpack": "rm -rf ./dist && webpack"
   },

@@ -4,13 +4,15 @@ import BPromise from 'bluebird'
 import wd from 'wd'
 import {assert} from 'chai'
 import {exec} from 'child_process'
-import {Cloud, LocalHost, AppiumServer} from './environment'
+import {Cloud, AppiumServer} from './environment'
 
 const iosCaps = {
   platformName: 'iOS',
-  deviceName: process.env.NAME || "iPhone 6",
-  udid: '8748d2bee70b9693a6fac194758abb7d370430fc',
-  bundleId: 'com.google.ios.youtube'
+  deviceName: process.env.NAME || "iPhone 6s",
+  // Use with AppiumServer
+  // udid: 'xxx',
+  bundleId: 'com.google.ios.youtube',
+  captureScreenshots: false
 }
 
 const caps = iosCaps

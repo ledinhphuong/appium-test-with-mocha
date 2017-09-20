@@ -8,8 +8,7 @@ import babel from 'gulp-babel'
 import _ from 'lodash'
 
 const Paths= {
-  // SRC: './src/*.js',
-  SRC: './src/session.js',
+  SRC: './src/*.js',
   BUILD: './build'
 }
 

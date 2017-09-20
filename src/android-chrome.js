@@ -4,7 +4,7 @@ import BPromise from 'bluebird'
 import wd from 'wd'
 import {assert} from 'chai'
 import {exec} from 'child_process'
-import {Cloud, LocalHost, AppiumServer} from './environment'
+import {Cloud, AppiumServer} from './environment'
 
 const execAsync = BPromise.promisify(exec, {multiArgs: true})
 
@@ -12,17 +12,16 @@ const androidCaps = {
   browserName: 'Chrome',
   platformName: 'Android',
   deviceName: process.env.NAME || "Galaxy S7",
-  // udid: 'ce0716079da3062c05',
-  captureScreenshots: true
+  captureScreenshots: false
 }
 
 const caps = androidCaps
-const server = Cloud
+const server = AppiumServer
 const testUrl = 'http://the-internet.herokuapp.com/login'
 const loopCount = process.env.LOOP || 1
 const TEST_CASE = 'Input name into textfield'
 
-console.log(`Using capabilities: ${JSON.stringify(caps)}`)
+console.log(`Device capabilities: ${JSON.stringify(caps)}`)
 
 describe(`Running \"${TEST_CASE}\" test with ${loopCount} time(s) on 1 device - ${new Date().toString()}`, () => {
   let i = 0
@@ -62,11 +61,6 @@ describe(`Running \"${TEST_CASE}\" test with ${loopCount} time(s) on 1 device - 
           .waitForElementByXPath("//form[@name='login']")
           .submit()
           .quit()
-
-        if (caps.udid) {
-          const [stdout2] = await execAsync(`\"${process.env.ANDROID_HOME}/platform-tools/adb\" -s ${caps.udid} shell input keyevent 26`)
-          console.log(stdout2)
-        }
       }
       catch (e) {
         console.error(e)
@@ -75,7 +69,7 @@ describe(`Running \"${TEST_CASE}\" test with ${loopCount} time(s) on 1 device - 
     })
   }
 
-  afterEach(() => {
+  afterEach(async () => {
     console.log(`[${itIdx}/${loopCount}] Ended - ${new Date().toString()}`)
   })
 

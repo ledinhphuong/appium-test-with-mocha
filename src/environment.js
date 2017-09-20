@@ -3,20 +3,14 @@ const AppiumServer = {
   port: 4723
 }
 
-const LocalHost = {
+// TODO: Re-configure your authentication
+const Cloud = {
   host: 'localhost',
-  auth: 'phuong:912002bd-6128-4b92-8c1d-4ee94a3ecf2e',
+  auth: 'phuongle:82587c62-0f47-423a-99cc-4adbc1ae4754',
   port: 3000
 }
 
-const Cloud = {
-  host: 'api-test.kobiton.com',
-  auth: 'phuongdle:dc08f5f8-a5ab-4d54-8ad1-c7443f2e864e',
-  port: 80
-}
-
 export default {
-  Cloud,
-  LocalHost,
   AppiumServer,
+  Cloud
 }

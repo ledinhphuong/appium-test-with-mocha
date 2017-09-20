@@ -4,19 +4,19 @@ import BPromise from 'bluebird'
 import wd from 'wd'
 import {assert} from 'chai'
 import {exec} from 'child_process'
-import {Cloud, LocalHost, AppiumServer} from './environment'
+import {Cloud, AppiumServer} from './environment'
 
 const iosCaps = {
   browserName: 'Safari',
   platformName: 'iOS',
-  deviceName: process.env.NAME || "iPhone 6",
-  udid: '79de3c497b9f174288a68019040ae4aa25907b44',
-  captureScreenshots: true,
-  newCommandTimeout: 90000
+  deviceName: process.env.NAME || "iPhone 6s",
+  // Use with AppiumServer
+  // udid: 'xxx',
+  captureScreenshots: false
 }
 
 const caps = iosCaps
-const server = Cloud
+const server = AppiumServer
 const testUrl = 'http://the-internet.herokuapp.com/login'
 const loopCount = process.env.LOOP || 1
 const TEST_CASE = 'Input name into textfield'
@@ -69,7 +69,7 @@ describe(`Running \"${TEST_CASE}\" test with ${loopCount} time(s) on 1 device - 
     })
   }
 
-  afterEach(() => {
+  afterEach(async () => {
     console.log(`[${itIdx}/${loopCount}] Ended - ${new Date().toString()}`)
   })
 
