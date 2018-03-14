@@ -1,5 +1,5 @@
-# auto-test
-Automation test script using ES6, Babel 6, Mocha and Istanbul
+# appium-test-with-mocha
+Automation test script using ES6, Babel 6, Mocha and Istanbul for mobile platforms
 
 ## Requirements
 ```bash
